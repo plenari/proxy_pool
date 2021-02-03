@@ -26,10 +26,9 @@ BANNER = r"""
 """
 
 VERSION = "2.1.1"
-
+HOSTIP="127.0.0.1"
 # ############### server config ###############
 HOST = "0.0.0.0"
-
 PORT = 5010
 
 # ############### database config ###################
@@ -37,7 +36,7 @@ PORT = 5010
 # example:
 #      Redis: redis://:password@ip:port/db
 #      Ssdb:  ssdb://:password@ip:port
-DB_CONN = 'redis://:pwd@127.0.0.1:6379/0'
+DB_CONN = 'redis://:shengjie@192.168.119.151:6379/2'
 
 # proxy table name
 TABLE_NAME = 'use_proxy'
@@ -63,7 +62,7 @@ VERIFY_URL = "http://www.baidu.com"
 
 VERIFY_TIMEOUT = 10
 
-MAX_FAIL_COUNT = 0
+MAX_FAIL_COUNT = 1
 
 
 # ############# scheduler config #################

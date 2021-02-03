@@ -17,9 +17,12 @@ from lxml import etree
 import requests
 import random
 import time
-
+from handler.configHandler import ConfigHandler
+from handler.proxyHandler import ProxyHandler
 from handler.logHandler import LogHandler
 
+proxy_handle=ProxyHandler()
+conf = ConfigHandler()
 requests.packages.urllib3.disable_warnings()
 
 
@@ -74,7 +77,11 @@ class WebRequest(object):
             headers.update(header)
         while True:
             try:
-                self.response = requests.get(url, headers=headers, timeout=timeout, *args, **kwargs)
+                proxys={}
+                if (proxy_handle.db.getCount()>10):
+                    proxys["http"]="http://"+eval(proxy_handle.db.get())['proxy']
+                self.response = requests.get(url, headers=headers, timeout=timeout,
+                                             proxies=proxys, *args, **kwargs)
                 return self
             except Exception as e:
                 self.log.error("requests: %s error: %s" % (url, str(e)))
@@ -93,4 +100,3 @@ class WebRequest(object):
     @property
     def text(self):
         return self.response.text
-

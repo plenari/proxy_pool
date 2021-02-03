@@ -29,6 +29,10 @@ class ConfigHandler(withMetaclass(Singleton)):
         return os.environ.get("HOST", setting.HOST)
 
     @LazyProperty
+    def serverHostIp(self):
+        return os.environ.get("HOSTIP", setting.HOSTIP)
+
+    @LazyProperty
     def serverPort(self):
         return os.environ.get("PORT", setting.PORT)
 
